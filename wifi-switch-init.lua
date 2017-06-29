@@ -1,6 +1,6 @@
 wifi.eventmon.register(wifi.eventmon.STA_GOT_IP, function(T)
 
-http.get("http://192.168.1.9:3000/api/register/1942035/LIGHT/"..T.IP, nil, function(code, data)
+http.get("http://192.168.1.7:3000/api/register/1942035/LIGHT/"..T.IP, nil, function(code, data)
     
   end)
 
@@ -27,9 +27,9 @@ srv:listen(80,function(conn)
             end
         end
         
-        if(_GET.pin == "ON1")then
+        if(_GET.pin == "ON")then
               gpio.write(led1, gpio.LOW);
-        elseif(_GET.pin == "OFF1")then
+        elseif(_GET.pin == "OFF")then
               gpio.write(led1, gpio.HIGH);
         end
         
@@ -45,6 +45,6 @@ end)
  end)
 
 station_cfg={}
-station_cfg.ssid="SSID"
-station_cfg.pwd="PASSWORD"
+station_cfg.ssid="Skynet AP2"
+station_cfg.pwd="letmeinskynetap2"
 wifi.sta.config(station_cfg)
