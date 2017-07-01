@@ -5,10 +5,10 @@ module.exports = function(homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
 
-    homebridge.registerAccessory("homebridge-blinds", "BlindsHTTP", BlindsHTTPAccessory);
+    homebridge.registerAccessory("homebridge-switch", "HTTPSwitch", HTTPSwitchAccessory);
 }
 
-function BlindsHTTPAccessory(log, config) {
+function HTTPSwitchAccessory(log, config) {
     // global vars
     this.log = log;
 
@@ -47,22 +47,22 @@ function BlindsHTTPAccessory(log, config) {
         .on('set', this.setTargetPosition.bind(this));
 }
 
-BlindsHTTPAccessory.prototype.getCurrentPosition = function(callback) {
+HTTPSwitchAccessory.prototype.getCurrentPosition = function(callback) {
     this.log("Requested CurrentPosition: %s", this.lastPosition);
     callback(null, this.lastPosition);
 }
 
-BlindsHTTPAccessory.prototype.getPositionState = function(callback) {
+HTTPSwitchAccessory.prototype.getPositionState = function(callback) {
     this.log("Requested PositionState: %s", this.currentPositionState);
     callback(null, this.currentPositionState);
 }
 
-BlindsHTTPAccessory.prototype.getTargetPosition = function(callback) {
+HTTPSwitchAccessory.prototype.getTargetPosition = function(callback) {
     this.log("Requested TargetPosition: %s", this.currentTargetPosition);
     callback(null, this.currentTargetPosition);
 }
 
-BlindsHTTPAccessory.prototype.setTargetPosition = function(pos, callback) {
+HTTPSwitchAccessory.prototype.setTargetPosition = function(pos, callback) {
     this.log("Set TargetPosition: %s", pos);
     this.currentTargetPosition = pos;
     const moveUp = (this.currentTargetPosition >= this.lastPosition);
@@ -83,7 +83,7 @@ BlindsHTTPAccessory.prototype.setTargetPosition = function(pos, callback) {
     }.bind(this));
 }
 
-BlindsHTTPAccessory.prototype.httpRequest = function(url, method, callback) {
+HTTPSwitchAccessory.prototype.httpRequest = function(url, method, callback) {
   request({
     method: method,
     url: url,
@@ -98,6 +98,6 @@ BlindsHTTPAccessory.prototype.httpRequest = function(url, method, callback) {
   }.bind(this));
 }
 
-BlindsHTTPAccessory.prototype.getServices = function() {
+HTTPSwitchAccessory.prototype.getServices = function() {
   return [this.service];
 }
