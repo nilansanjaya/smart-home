@@ -15,15 +15,14 @@ router.get('/', function(req, res, next) {
 	
 	var devices = [];
 	var db = new sqlite3.Database('devices.sqlite')
-db.serialize(function () {
-	db.each('SELECT rowid AS id, device_id,name,ip,status FROM devices', function (err, row) {
-		console.log(row.name);
-	  	devices.push({"device_id": row.device_id, "name" : row.name, "ip" : row.ip, "status": row.status});
-	}, function() {
-		console.log(devices);
-		res.render('index.html', { title: 'Homebridge', 'devices': devices });
+
+	db.serialize(function () {
+		db.each('SELECT rowid AS id, device_id,name,ip,status FROM devices', function (err, row) {
+		  	devices.push({"device_id": row.device_id, "name" : row.name, "ip" : row.ip, "status": row.status});
+		}, function() {
+			res.render('index.html', { title: 'Homebridge', 'devices': devices });
+		})
 	})
-})
 
 	db.close();
 });
