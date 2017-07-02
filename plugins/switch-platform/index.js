@@ -27,9 +27,9 @@ SwitchPlatform.prototype.addAccessory = function(device, callback) {
     platformAccessory.context.deviceId = device.id;
     //platformAccessory.context.device = device;
 
-    const accessory = new OrviboAccessory(this.log, platformAccessory, this.orvibo);
+    //const accessory = new OrviboAccessory(this.log, platformAccessory, this.orvibo);
 
-    accessory.configure();
+    //accessory.configure();
     //this.accessories.set(device.macAddress, accessory);
     this.api.registerPlatformAccessories('homebridge-switch-platform-switch', 'switch', [platformAccessory]);
   }
