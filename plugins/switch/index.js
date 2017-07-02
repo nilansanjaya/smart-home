@@ -30,6 +30,8 @@ function HTTPSwitchAccessory(log, config) {
 
     }.bind(this));
 
+    console.log(this.upURL);
+
     // state vars
     this.lastPosition = 0; // last known position of the blinds, down by default
     this.currentPositionState = 2; // stopped by default
