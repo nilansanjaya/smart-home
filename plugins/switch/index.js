@@ -22,7 +22,7 @@ function HTTPSwitchAccessory(log, config) {
 
     request({
     method: "GET",
-    url: "localhost:3000/api/getip/"+this.device_id,
+    url: "http://localhost:3000/api/getip/"+this.device_id,
     }, function(err, response, body) {
 
         this.upURL = "http://"+body+"/?pin=ON";
@@ -59,7 +59,7 @@ function HTTPSwitchAccessory(log, config) {
         .getCharacteristic(Characteristic.TargetPosition)
         .on('get', this.getTargetPosition.bind(this))
         .on('set', this.setTargetPosition.bind(this));
-        
+
 
     }.bind(this));
 }
