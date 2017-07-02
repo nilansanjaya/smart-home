@@ -20,8 +20,6 @@ function HTTPSwitchAccessory(log, config) {
 
     this.device_id = config["device_id"];
 
-    this.httpRequest(, "GET", function() {});
-
     request({
     method: "GET",
     url: "localhost:3000/api/getip/"+this.device_id,
