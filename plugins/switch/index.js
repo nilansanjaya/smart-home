@@ -14,9 +14,23 @@ function HTTPSwitchAccessory(log, config) {
 
     // configuration vars
     this.name = config["name"];
-    this.upURL = config["up_url"];
-    this.downURL = config["down_url"];
+    this.upURL = '';
+    this.downURL = '';
     this.httpMethod = config["http_method"] || "POST";
+
+    this.device_id = config["device_id"];
+
+    this.httpRequest(, "GET", function() {});
+
+    request({
+    method: "GET",
+    url: "localhost:3000/api/getip/"+this.device_id,
+    }, function(err, response, body) {
+
+        this.upURL = "http://"+body+"/?pin=ON";
+        this.downURL = "http://"+body+"/?pin=OFF";
+
+    }.bind(this));
 
     // state vars
     this.lastPosition = 0; // last known position of the blinds, down by default
