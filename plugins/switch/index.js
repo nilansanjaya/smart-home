@@ -28,9 +28,11 @@ function HTTPSwitchAccessory(log, config) {
         this.upURL = "http://"+body+"/?pin=ON";
         this.downURL = "http://"+body+"/?pin=OFF";
 
-    
+        console.log(this.upURL);
 
-    console.log(this.upURL);
+    }.bind(this));
+
+
 
     // state vars
     this.lastPosition = 0; // last known position of the blinds, down by default
@@ -59,9 +61,6 @@ function HTTPSwitchAccessory(log, config) {
         .getCharacteristic(Characteristic.TargetPosition)
         .on('get', this.getTargetPosition.bind(this))
         .on('set', this.setTargetPosition.bind(this));
-
-
-    }.bind(this));
 }
 
 HTTPSwitchAccessory.prototype.getCurrentPosition = function(callback) {
