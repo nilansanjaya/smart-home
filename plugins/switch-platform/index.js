@@ -1,5 +1,5 @@
 var Accessory, Service, Characteristic, UUIDGen;
-var log, config, api
+var log, config, api, accessories
 
 module.exports = function (homebridge) {
   Accessory = homebridge.platformAccessory;
@@ -14,6 +14,7 @@ function SwitchPlatform(log, config, api) {
 	this.log = log;
 	this.config = config;
 	this.api = api;
+	this.accessories = [];
 
 	device = {
 		id: "alskdalskd",
