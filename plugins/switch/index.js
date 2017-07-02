@@ -36,7 +36,7 @@ function HTTPSwitchAccessory(log, config) {
     this.currentTargetPosition = 0; // down by default
 
     // register the service and provide the functions
-    this.service = new Service.WindowCovering(this.name);
+    this.service = new Service.WindowCovering(this.name+"-"+this.device_id);
 
     // the current position (0-100%)
     // https://github.com/KhaosT/HAP-NodeJS/blob/master/lib/gen/HomeKitTypes.js#L493
