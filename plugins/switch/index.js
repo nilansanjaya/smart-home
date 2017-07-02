@@ -1,18 +1,24 @@
 var request = require("request");
 var Service, Characteristic;
-var upURL;
 
 module.exports = function(homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
 
-    homebridge.registerAccessory("homebridge-switch", "HTTPSwitch", HTTPSwitchAccessoryRun);
+    homebridge.registerAccessory("homebridge-switch", "HTTPSwitch", HTTPSwitchAccessory);
 }
 
-function HTTPSwitchAccessoryRun(log, config) {
+function HTTPSwitchAccessory(log, config) {
+    // global vars
+    this.log = log;
+
+    // configuration vars
+    this.name = config["name"];
+    this.upURL = '';
+    this.downURL = '';
+    this.httpMethod = config["http_method"] || "POST";
 
     this.device_id = config["device_id"];
-
 
     request({
     method: "GET",
@@ -22,25 +28,9 @@ function HTTPSwitchAccessoryRun(log, config) {
         this.upURL = "http://"+body+"/?pin=ON";
         this.downURL = "http://"+body+"/?pin=OFF";
 
-        HTTPSwitchAccessory(log, config);
+        console.log(this.upURL);
 
     }.bind(this));
-
-}
-
-function HTTPSwitchAccessory(log, config) {
-    // global vars
-    this.log = log;
-
-    // configuration vars
-    this.name = config["name"];
-    //this.upURL = '';
-    //this.downURL = '';
-    this.httpMethod = config["http_method"] || "POST";
-
-    console.log(this.upURL);
-
-    
 
 
 
