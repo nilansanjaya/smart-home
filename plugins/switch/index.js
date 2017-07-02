@@ -28,7 +28,7 @@ function HTTPSwitchAccessory(log, config) {
         this.upURL = "http://"+body+"/?pin=ON";
         this.downURL = "http://"+body+"/?pin=OFF";
 
-    }.bind(this));
+    
 
     console.log(this.upURL);
 
@@ -59,6 +59,9 @@ function HTTPSwitchAccessory(log, config) {
         .getCharacteristic(Characteristic.TargetPosition)
         .on('get', this.getTargetPosition.bind(this))
         .on('set', this.setTargetPosition.bind(this));
+        
+
+    }.bind(this));
 }
 
 HTTPSwitchAccessory.prototype.getCurrentPosition = function(callback) {
