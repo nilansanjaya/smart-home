@@ -14,7 +14,7 @@ function SwitchPlatform() {
 		id: "alskdalskd",
 		name: "switch"
 	};
-	self.addAccessory(device);
+	this.addAccessory(device);
 }
 
 SwitchPlatform.prototype.addAccessory = function(device, callback) {
