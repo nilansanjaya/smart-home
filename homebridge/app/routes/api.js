@@ -17,4 +17,11 @@ router.get('/register/:id/:name/:ip', function(req, res, next) {
   	res.send(req.params);
 });
 
+/* GET users listing. */
+router.get('/getip/:id', function(req, res, next) {
+	db.all('SELECT * from devices where device_id="'+req.params.id+'"',function(err,rows){
+		res.send(rows[0].ip);
+	});
+});
+
 module.exports = router;
